@@ -6,7 +6,6 @@ import { router } from './routes';
 import { authRouter } from './authRoutes';
 import { checkToken } from './tokenCheck';
 
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

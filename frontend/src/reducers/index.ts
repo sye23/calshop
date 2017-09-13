@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import sample from './sample';
+import dateReducer from './dateReducer';
 
 
 const rootReducer = combineReducers({
-    sample
+    dateReducer
 });
 
 export default rootReducer;
