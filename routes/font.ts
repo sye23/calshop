@@ -3,8 +3,8 @@ const router = express();
 import * as db from '../repo';
 import {Request, Response} from 'express';
 
-router.get('/sample', async(req : Request, res : Response) => {
-    let response = await db.sample.getSample(req.id);
+router.get('/getFonts', async(req : Request, res : Response) => {
+    let response = await db.font_repo.getFonts();
     res.json(response)
 })
 

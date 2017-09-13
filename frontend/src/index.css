@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Belleza');
+body {
+    background-color: #d42427;
+    color: white;
+}
+
+.mainHeader {
+    font-family: 'Belleza', sans-serif;
+    color: white;
+    text-align: center;
+    margin-top: 5%;
+    font-size: 3.5em;
+    margin-bottom: 6%;
+}
+
+.formHeader {
+    font-family: 'Belleza', sans-serif;
+    text-align: center;
+    font-size: 4em;
+    padding-top: 3%;
+    margin-bottom: 5%;
+}
+
+.formTitle {
+    font-family: 'Belleza', sans-serif;
+    padding-top: 10%;
+}
+
+.datePicker {
+    font-family: 'Belleza', sans-serif;
+    border-radius: 5px;
+    text-align: center;
+    color: #d42427;
+    font-weight: bold;
+    font-size: 1.75em;
+    border: 1px solid #d42427;
+}
+
+.dateDiv {
+    margin-top: 20%;
+}
+
+.backButton {
+    margin: 0 auto;
+}
+
+.startOrderBtnDiv {
+    margin-top: 15%;
+}
+
+.ui.center.aligned.header,
+.ui.centered.header {
+    text-align: center;
+    font-family: 'Belleza', sans-serif;
+    color: #d42427;
+}
+
+.ui.fluid.button {
+    font-family: 'Belleza', sans-serif;
+    display: block;
+}
+
+.ui.huge.button {
+    font-family: 'Belleza', sans-serif;
+}
+
+.ui.form .field>label {
+    font-family: 'Belleza', sans-serif;
+    color: white;
+    float: left;
+}
+
+.startOrderBtnDiv .ui.inverted.button {
+    font-family: 'Belleza', sans-serif;
+}
+
+.startOrderBtnDiv .ui.inverted.button:hover {
+    font-family: 'Belleza', sans-serif;
+    color: #d42427;
+}
+
+.react-datepicker__input-container {
+    color: #d42427;
+}
+
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--in-selecting-range:hover,
+.react-datepicker__day--in-range:hover {
+    background-color: #d42427;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+    background-color: #d42427;
+}
+
+.react-datepicker__day--keyboard-selected:hover {
+    background-color: #d42427;
+}
+
+.react-datepicker__day--keyboard-selected {
+    background-color: #d42427;
+}
+
+@media (max-width: 768px) {
+    .ui.form {
+        padding-left: 3%;
+    }
+    .backButton {
+        margin: 0 auto;
+    }
+    .formHeader {
+        margin-bottom: 10%;
+    }
+}
+
+@media (max-width: 415px) {
+    .mainHeader {
+        font-family: 'Belleza', sans-serif;
+        color: white;
+        text-align: center;
+        margin-top: 5%;
+        font-size: 2.5em;
+        margin-bottom: 35%;
+    }
+    .formHeader {
+        font-family: 'Belleza', sans-serif;
+        text-align: center;
+        font-size: 2.5em;
+        padding-top: 3%;
+        margin-bottom: 10%;
+    }
+}
+
+@media (max-width: 405px) {
+    .ui.huge.button,
+    .ui.huge.buttons .button,
+    .ui.huge.buttons .or {
+        font-size: 1.13rem;
+    }
+}

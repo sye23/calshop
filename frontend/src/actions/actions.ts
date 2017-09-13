@@ -1,16 +1,24 @@
 import * as types from './types';
 
-function actionSuccess(boolean: boolean) {
+function dateSuccess(date: any) {
     return {
-        type: types.ACTION_SUCCESS,
-        payload: boolean
+        type: types.DATE_SUCCESS,
+        payload: date
+    }
+}
+
+function removeDateSuccess() {
+    return {
+        type: types.DATE_SUCCESS,
+        payload: ''
     }
 }
 
 
 
 export {
-    actionSuccess 
+    dateSuccess,
+    removeDateSuccess 
 }
 
 

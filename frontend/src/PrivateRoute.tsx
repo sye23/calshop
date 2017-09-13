@@ -17,7 +17,7 @@ export default function PrivateRoute (Component:any, allowedTypes:any){
 
   componentWillMount() {
     let state = Object.assign({}, this.state)
-    const token:any = localStorage.getItem('authToken');
+    const token:any = localStorage.getItem('token');
     if(token){
       state.isLoggedIn = true;
     }
