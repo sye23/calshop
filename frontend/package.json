@@ -6,7 +6,6 @@
     "dependencies": {
         "@types/jest": "^19.2.4",
         "@types/jwt-decode": "^2.2.1",
-        "@types/lodash.find": "^4.6.3",
         "@types/moment": "^2.13.0",
         "@types/node": "^7.0.31",
         "@types/react": "^15.0.33",

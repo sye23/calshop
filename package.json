@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon --exec npm-run ts-node server.ts",
+        "start:prod": "PROD=true ./node_modules/.bin/ts-node server.ts",
         "knex-init": "npm-run knex init",
-        "migrate-latest": "npm-run knex migrate:latest",
-        "heroku-postbuild": "cd frontend && npm install --only=dev && npm install && npm run build"
+        "migrate-latest": "npm-run knex migrate:latest"
     },
     "keywords": [],
     "author": "",
