@@ -1,41 +1,40 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8000",
-  "dependencies": {
-    "@types/jest": "^19.2.4",
-    "@types/jwt-decode": "^2.2.1",
-    "@types/lodash.find": "^4.6.3",
-    "@types/moment": "^2.13.0",
-    "@types/node": "^7.0.31",
-    "@types/react": "^15.0.33",
-    "@types/react-datepicker": "^0.52.2",
-    "@types/react-dom": "^15.5.1",
-    "@types/react-redux": "^4.4.45",
-    "@types/react-router-dom": "^4.0.4",
-    "@types/redux-thunk": "^2.1.0",
-    "axios": "^0.16.2",
-    "jwt-decode": "^2.2.0",
-    "lodash.find": "^4.6.0",
-    "moment": "^2.18.1",
-    "react": "^15.6.1",
-    "react-datepicker": "^0.54.0",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "react-stopwatch": "^1.0.3",
-    "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0",
-    "semantic-ui-react": "^0.71.3"
-  },
-  "devDependencies": {
-    "react-scripts-ts": "2.3.2"
-  },
-  "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
-  }
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "proxy": "http://localhost:8000",
+    "dependencies": {
+        "@types/jest": "^19.2.4",
+        "@types/jwt-decode": "^2.2.1",
+        "@types/lodash.find": "^4.6.3",
+        "@types/moment": "^2.13.0",
+        "@types/node": "^7.0.31",
+        "@types/react": "^15.0.33",
+        "@types/react-datepicker": "^0.52.2",
+        "@types/react-dom": "^15.5.1",
+        "@types/react-redux": "^4.4.45",
+        "@types/react-router-dom": "^4.0.4",
+        "@types/redux-thunk": "^2.1.0",
+        "axios": "^0.16.2",
+        "jwt-decode": "^2.2.0",
+        "moment": "^2.18.1",
+        "react": "^15.6.1",
+        "react-datepicker": "^0.54.0",
+        "react-dom": "^15.6.1",
+        "react-redux": "^5.0.5",
+        "react-router-dom": "^4.1.1",
+        "react-stopwatch": "^1.0.3",
+        "redux": "^3.7.1",
+        "redux-thunk": "^2.2.0",
+        "semantic-ui-react": "^0.71.3"
+    },
+    "devDependencies": {
+        "react-scripts-ts": "2.3.2"
+    },
+    "scripts": {
+        "start": "react-scripts-ts start",
+        "build": "react-scripts-ts build",
+        "test": "react-scripts-ts test --env=jsdom",
+        "eject": "react-scripts-ts eject"
+    }
 }
