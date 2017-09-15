@@ -22,8 +22,8 @@ export default class App extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    if (localStorage.getItem('authToken') !== null) {
-      const token: any = localStorage.getItem('authToken');
+    if (localStorage.getItem('token') !== null) {
+      const token: any = localStorage.getItem('token');
       if (this.checkWebToken(token)) {
         localStorage.removeItem('token');
         localStorage.removeItem('name');
