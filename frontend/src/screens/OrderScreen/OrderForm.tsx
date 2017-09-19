@@ -40,14 +40,15 @@ const OrderForm = (props:any) => {
                 </Form.Field>
                 <Form.Field>
                     <label>Select Size</label>
-                    <Form.Input 
-                    disabled = {(props.order.item )?false:true}
-                    placeholder='Enter A Size' 
+                    <Form.Dropdown 
+                    disabled = {(props.order.item)?false:true}
+                    placeholder='Select An Size' 
                     fluid 
-                    name = 'size'
-                    value = {props.order.size} 
-                    onChange = {props.inputChangeHandler}
-                    />              
+                    selection 
+                    onChange = {props.sizeChangeHandler}
+                    options={props.options.size} 
+                    value={props.order.size} 
+                    />                    
                 </Form.Field>
                 <Form.Field>
                     <label>Select Paper Color</label>
@@ -55,7 +56,6 @@ const OrderForm = (props:any) => {
                     disabled = {(props.order.item && props.order.size )?false:true}
                     placeholder='Select A Paper Color' 
                     fluid 
-                    search 
                     selection 
                     onChange = {props.paperChangeHandler}
                     options={props.options.paper} 
@@ -68,7 +68,6 @@ const OrderForm = (props:any) => {
                     disabled = {(props.order.item && props.order.size && props.order.paper )?false:true} 
                     placeholder='Select An Ink Color' 
                     fluid 
-                    search 
                     selection 
                     onChange = {props.colorChangeHandler}
                     options={props.options.color} 
@@ -81,7 +80,6 @@ const OrderForm = (props:any) => {
                     disabled = {(props.order.item && props.order.size && props.order.paper && props.order.color)?false:true}
                     placeholder='Select A Font' 
                     fluid 
-                    search 
                     selection 
                     onChange = {props.fontChangeHandler}
                     options={props.options.font} 
@@ -94,7 +92,6 @@ const OrderForm = (props:any) => {
                     disabled = {(props.order.item && props.order.size && props.order.paper && props.order.color && props.order.font)?false:true}
                     placeholder='Select A Design' 
                     fluid 
-                    search 
                     selection 
                     onChange = {props.designChangeHandler}
                     options={props.options.design} 
@@ -109,6 +106,7 @@ const OrderForm = (props:any) => {
                     fluid 
                     type = 'number'
                     name = 'quantity'
+                    min="0"
                     value = {props.order.quantity} 
                     onChange = {props.inputChangeHandler}
                     />              
@@ -117,8 +115,8 @@ const OrderForm = (props:any) => {
                     <label>Special Instuctions</label>
                     <Form.TextArea 
                     disabled = {(props.order.item && props.order.size && props.order.paper && props.order.color && props.order.font && props.order.design && props.order.quantity)?false:true}
-                    placeholder='Max 250 Characters'
-                    maxLength="250" 
+                    placeholder='Special Instuctions'
+                    maxLength="1000" 
                     name = 'message'
                     value = {props.order.message} 
                     onChange = {props.inputChangeHandler}

@@ -58,13 +58,13 @@ async function getColor(id: number){
       return options;
 }
 
-async function getDesign(){
+async function getDesign(id: number){
   const token: any = localStorage.getItem('token');
   const config = {
     headers: { 'x-access-token': token }
   };
     let options: any = [];
-    let designs = await axios.get('/api/design/getDesigns',config).catch(e=>{return e.response.data});
+    let designs = await axios.get(`/api/design/getDesigns/${id}`,config).catch(e=>{return e.response.data});
     designs.data.map((design: any)=>{
         let option={
           key:design.id,
@@ -76,13 +76,13 @@ async function getDesign(){
       return options;
 }
 
-async function getFont(){
+async function getFont(id: number){
   const token: any = localStorage.getItem('token');
   const config = {
     headers: { 'x-access-token': token }
   };
     let options: any = [];
-    let fonts = await axios.get('/api/font/getFonts',config).catch(e=>{return e.response.data});
+    let fonts = await axios.get(`/api/font/getFonts/${id}`,config).catch(e=>{return e.response.data});
     fonts.data.map((font: any)=>{
         let option={
           key:font.id,
@@ -94,10 +94,29 @@ async function getFont(){
       return options;
 }
 
+async function getSize(id: number){
+  const token: any = localStorage.getItem('token');
+  const config = {
+    headers: { 'x-access-token': token }
+  };
+    let options: any = [];
+    let sizes = await axios.get(`/api/size/getSize/${id}`,config).catch(e=>{return e.response.data});
+    sizes.data.map((size: any)=>{
+        let option={
+          key:size.id,
+          value: size.id,
+          text: size.name
+        }
+        options.push(option)
+      })
+      return options;
+}
+
 export{
     getItems,
     getPaper,
     getColor,
     getFont,
-    getDesign
+    getDesign,
+    getSize
 }

@@ -4,6 +4,7 @@ import * as color_repo from './color_repo';
 import * as paper_repo from './paper_repo';
 import * as font_repo from './font_repo';
 import * as design_repo from './design_repo';
+import * as size_repo from './size_repo';
 
 
 export {
@@ -12,5 +13,6 @@ export {
     color_repo,
     paper_repo,
     font_repo,
-    design_repo
+    design_repo,
+    size_repo
 }

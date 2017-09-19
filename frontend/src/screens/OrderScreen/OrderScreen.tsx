@@ -20,7 +20,8 @@ class OrderScreen extends React.Component < any, any > {
         paper: [],
         color: [],
         font: [],
-        design: []
+        design: [],
+        size: []
       },
       order:{
         date: null,
@@ -66,11 +67,21 @@ class OrderScreen extends React.Component < any, any > {
     let option = data.options.filter((option: any)=>{return option.key === data.value});
       state.values.item = data.value;
       state.order.item = option[0].text;
+      state.options.size = await getData.getSize(data.value);
+      state.options.font = await getData.getFont(data.value);
+      state.options.design = await getData.getDesign(data.value); 
       state.options.paper = await getData.getPaper(data.value);
       state.options.color = await getData.getColor(data.value);
       
       this.setState(state);
   }
+  sizeChangeHandler = (e: any, data: any) => {
+    let state = Object.assign({}, this.state);
+    let option = data.options.filter((option: any)=>{return option.key === data.value});
+      state.values.size =  data.value;
+      state.order.size = option[0].text;
+      this.setState(state);
+}
   paperChangeHandler = (e: any, data: any) => {
       let state = Object.assign({}, this.state);
       let option = data.options.filter((option: any)=>{return option.key === data.value});
@@ -109,8 +120,6 @@ class OrderScreen extends React.Component < any, any > {
     let savedDate = localStorage.getItem('date');
     (this.props.date)?state.order.date = moment(this.props.date).format('MM/DD/YYYY'):state.order.date = savedDate;
     state.options.item = await getData.getItems();
-    state.options.font = await getData.getFont();
-    state.options.design = await getData.getDesign(); 
     this.setState(state);
   }
 
@@ -172,6 +181,7 @@ class OrderScreen extends React.Component < any, any > {
                   finalOrder = {this.state.finalOrder}
                   inputChangeHandler = {this.inputChangeHandler}
                   itemChangeHandler = {this.itemChangeHandler}
+                  sizeChangeHandler = {this.sizeChangeHandler}
                   paperChangeHandler = {this.paperChangeHandler}
                   colorChangeHandler = {this.colorChangeHandler}
                   fontChangeHandler = {this.fontChangeHandler}

@@ -58,6 +58,7 @@ componentWillUnmount(){
             <Grid.Column textAlign='center' mobile={8} tablet={6} computer={4}>
               <div className='dateDiv'>
               <DatePicker
+                readOnly
                 selected={this.state.startDate}
                 onChange={this.handleChange.bind(this)}
                 minDate={moment()}
