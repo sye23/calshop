@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import * as reducerActions from '../../actions/actions';
 import * as moment from 'moment';
+import InfoForm from './InfoForm';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
@@ -18,22 +19,41 @@ class StartForm extends React.Component < any, any >{
     super();
     this.state = {
       redirect : '',
-      startDate: null
+      startDate: null,
+      customer:{
+        firstName: '',
+        lastName: ''
+      }
     }
   }
 
  
 
 validate = () =>{
-  this.props.addDateSuccess(this.state.startDate)
+  let obj = {
+    firstName: this.state.customer.firstName,
+    lastName: this.state.customer.lastName
+  }
+  let name = utils.capitalizeFirstLetter(this.state.customer.firstName)+' '+utils.capitalizeFirstLetter(this.state.customer.lastName)
+  this.props.addDateSuccess(this.state.startDate);
+  this.props.addCustomerSuccess(obj);
   localStorage.setItem('date', moment(this.state.startDate).format('MM/DD/YYYY'));
-  let state = Object.assign({}, this.state)
-  if(this.state.startDate){
+  localStorage.setItem('customer', name)
+  let state = Object.assign({}, this.state);
+  if(this.state.startDate && this.state.customer.firstName && this.state.customer.lastName){
       state.redirect = <Redirect to={'/orderForm'}/>;
       state.startdate = null;
   }
   this.setState(state);
 }
+
+
+inputChangeHandler  = (e: any) =>{
+  let state = Object.assign({}, this.state);
+  state.customer[e.target.name] = e.target.value;
+  this.setState(state);
+}
+
 
 handleChange = (date: any) => {
   this.setState({
@@ -52,27 +72,15 @@ componentWillUnmount(){
       <div>
       {this.state.redirect}        
         <h1 className='formHeader'>The Calligraphy Shop</h1>
-        
-        <Grid stackable>
-          <Grid.Row centered>
-            <Grid.Column textAlign='center' mobile={8} tablet={6} computer={4}>
-              <div className='dateDiv'>
-              <DatePicker
-                readOnly
-                selected={this.state.startDate}
-                onChange={this.handleChange.bind(this)}
-                minDate={moment()}
-                maxDate={moment().add(180, "days")}
-                placeholderText="Date Of Event" 
-                className="datePicker"
-              />
-              </div>
-              <div className='startOrderBtnDiv'>
-                <Button className='startOrderBtn' size='massive' fluid inverted onClick={this.validate} disabled={(this.state.startDate)?false:true}>Start Order</Button>
-              </div>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <InfoForm
+          startDate = {this.state.startDate}
+          firstName = {this.state.customer.firstName}
+          lastName = {this.state.customer.lastName}
+          validate = {this.validate}
+          inputChangeHandler = {this.inputChangeHandler}
+          handleChange = {this.handleChange.bind(this)}
+        />
+       
       </div>
 
     )
@@ -84,6 +92,7 @@ componentWillUnmount(){
 function mapDispatchToProps(dispatch: any) {
   return {
       addDateSuccess: (date: Date) => dispatch(reducerActions.dateSuccess(date)),
+      addCustomerSuccess: (obj: any) => dispatch(reducerActions.addCustomerSuccess(obj))
       }
 }
 

@@ -26,18 +26,23 @@ body {
     padding-top: 10%;
 }
 
-.datePicker {
+.forTitle {
+    float: left;
     font-family: 'Belleza', sans-serif;
-    border-radius: 5px;
-    text-align: center;
-    color: #d42427;
-    font-weight: bold;
-    font-size: 1.75em;
-    border: 1px solid #d42427;
+}
+
+.dateTitle {
+    float: right;
+    font-family: 'Belleza', sans-serif;
 }
 
 .dateDiv {
-    margin-top: 20%;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.dateLabel {
+    font-family: 'Belleza', sans-serif;
 }
 
 .backButton {
@@ -46,6 +51,26 @@ body {
 
 .startOrderBtnDiv {
     margin-top: 15%;
+}
+
+#reviewHeader {
+    padding-bottom: 0;
+}
+
+#reviewTable {
+    padding-top: 0;
+    font-family: 'Belleza', sans-serif;
+}
+
+.submitMsg {
+    font-family: 'Belleza', sans-serif;
+    color: white;
+    text-align: center;
+    margin-top: 25%;
+}
+
+.ui.form input[type=text] {
+    font-family: 'Belleza', sans-serif;
 }
 
 .ui.center.aligned.header,

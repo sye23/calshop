@@ -31,7 +31,6 @@ const OrderForm = (props:any) => {
                     <Form.Dropdown 
                     placeholder='Select An Item' 
                     fluid 
-                    search 
                     selection 
                     onChange = {props.itemChangeHandler}
                     options={props.options.item} 

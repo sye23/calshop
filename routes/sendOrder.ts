@@ -10,13 +10,14 @@ router.post('/', async(req : Request, res : Response) => {
     let emailTitle = `<h3 style="text-align:center">From:${user.name} <br/> 
                                                     Phone:${user.phone}<br/> 
                                                     Email:${user.email}</h3>
+                        <h3>For:${orders[0].customer}</h3>
                         <h3>Date Of Event:${orders[0].date}</h3><hr/>`
     let orderEmail = orders.map((order: any, index: any)=>{
         return (`<table style="text-align:left"> 
                     <tr> 
                         <th>Order#:</th> 
                         <td>${index+1}/${orders.length}</td>
-                    </tr> 
+                    </tr>  
                     <tr> 
                         <th>Item:</th> 
                         <td>${order.item}</td>

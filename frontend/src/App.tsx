@@ -31,6 +31,7 @@ export default class App extends React.Component<any, any> {
         localStorage.removeItem('email');
         localStorage.removeItem('date');
         localStorage.removeItem('roll');
+        localStorage.removeItem('customer');
       }
     }
 

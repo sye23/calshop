@@ -90,7 +90,7 @@ submit = async() => {
               verticalAlign='middle'>
               <Grid.Row centered>
                 <Grid.Column mobile={16} tablet={10} computer={5}>
-                    <Form fluid size='large' error = {this.state.errors.error}>
+                    <Form  size='large' error = {this.state.errors.error}>
         
                         <Message
                             floating

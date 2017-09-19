@@ -32,7 +32,8 @@ class OrderScreen extends React.Component < any, any > {
         font: '',
         design: '',
         quantity: '',
-        message: ''
+        message: '',
+        customer: ''
       },
       values:{
         item: '',
@@ -119,6 +120,7 @@ class OrderScreen extends React.Component < any, any > {
     let state = Object.assign({}, this.state);
     let savedDate = localStorage.getItem('date');
     (this.props.date)?state.order.date = moment(this.props.date).format('MM/DD/YYYY'):state.order.date = savedDate;
+    (this.props.customer)?state.order.customer = utils.capitalizeFirstLetter(this.props.customer.firstName)+' '+utils.capitalizeFirstLetter(this.props.customer.lastName): state.order.customer = localStorage.getItem('customer');
     state.options.item = await getData.getItems();
     this.setState(state);
   }
@@ -132,7 +134,6 @@ class OrderScreen extends React.Component < any, any > {
 
   addItemHandler = () =>{ 
     let order = {
-      date: this.state.order.date,
       item: '',
       size: '',
       paper: '',
@@ -163,8 +164,8 @@ class OrderScreen extends React.Component < any, any > {
   }
 
 
+
   render() {
-    //console.log('Original State******',this.state.finalOrder)
     let render;
     let order = this.state.order;
     let options = this.state.options;
@@ -205,7 +206,8 @@ class OrderScreen extends React.Component < any, any > {
 
 function mapStateToProps(state: any) {
   return {
-      date: state.dateReducer
+      date: state.dateReducer,
+      customer: state.customerReducer
   }
 }
 
