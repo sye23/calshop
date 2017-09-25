@@ -3,11 +3,13 @@ import * as React from 'react';
 import {Button, Grid, Dropdown, Form} from 'semantic-ui-react';
 import * as utils from '../../utils/utilFunctions';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, Redirect} from 'react-router-dom';
 import * as getData from '../../components/common/GetData';
 import ReviewOrder from './ReviewOrder';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
+import * as jwtDecode from 'jwt-decode';
+
 
 
 class OrderScreen extends React.Component < any, any > {
@@ -48,7 +50,8 @@ class OrderScreen extends React.Component < any, any > {
       user:{
         name: localStorage.getItem('name'),
         phone: localStorage.getItem('phone'),
-        email: localStorage.getItem('email')
+        email: localStorage.getItem('email'),
+        company: localStorage.getItem('company')
       },
       finalOrder:[],
       isReviewable: false,
@@ -163,12 +166,29 @@ class OrderScreen extends React.Component < any, any > {
     window.scrollTo(0, 0)
   }
 
+  checkWebToken = (token: any) => {
+    const jwt: any = jwtDecode(token);
+
+    if (jwt.exp < Date.now() / 1000) {
+      return true;
+    }
+    return false;
+  }
+
 
 
   render() {
     let render;
+    let redirect;
     let order = this.state.order;
     let options = this.state.options;
+
+   if (localStorage.getItem('token') !== null) {
+      const token: any = localStorage.getItem('token');
+      if (this.checkWebToken(token) || localStorage.getItem('date') === null) {
+        redirect = <Redirect to={'/chooseDate'}/>
+      }
+   }
     
     if(this.state.isReviewable){
       render = <ReviewOrder 
@@ -196,6 +216,7 @@ class OrderScreen extends React.Component < any, any > {
     return (
         <div>
           <h1 className='formHeader'>The Calligraphy Shop</h1>
+          {redirect}
           {render}
         </div>
 

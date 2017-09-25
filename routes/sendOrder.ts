@@ -6,8 +6,10 @@ import * as utils from '../utils/utilFunctions';
 router.post('/', async(req : Request, res : Response) => {
     let orders = req.body.order;
     let user = req.body.user;
+    let name;
+    (user.name.length > 1)?name=`${user.name} / `:name='';
 
-    let emailTitle = `<h3 style="text-align:center">From:${user.name} <br/> 
+    let emailTitle = `<h3 style="text-align:center">From:${name}${user.company}<br/> 
                                                     Phone:${user.phone}<br/> 
                                                     Email:${user.email}</h3>
                         <h3>For:${orders[0].customer}</h3>

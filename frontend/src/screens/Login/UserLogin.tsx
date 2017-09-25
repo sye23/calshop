@@ -46,19 +46,24 @@ formValidation = () =>{
 
 
 submit = async() => {
+  let state =Object.assign({}, this.state);
   this.formValidation()
   if(this.formValidation()){
-      let response = await axios.post('/auth/login',{login: this.state.user})
-      let name = utils.capitalizeFirstLetter(response.data.firstName)+' '+utils.capitalizeFirstLetter(response.data.lastName)
-      if(response.data.success){
+      let response = await axios.post('/auth/login',{login: this.state.user}).catch(e=>{return e.response.data});
+      if(response === 'Invalid Login Credentials'){
+        state.errors.error = true;
+        state.errors.errorMsg = response;
+        this.setState(state);
+      }else if(response.data.success){
+        let name = utils.capitalizeFirstLetter(response.data.firstName)+' '+utils.capitalizeFirstLetter(response.data.lastName)
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('name', name);
+          localStorage.setItem('company', response.data.company)
           localStorage.setItem('phone', response.data.phone);
           localStorage.setItem('email', response.data.email);
           localStorage.setItem('roll', response.data.roll);
           this.setState({isSubmittable: true});
       }
-      
  }
 }
 
@@ -91,7 +96,6 @@ submit = async() => {
               <Grid.Row centered>
                 <Grid.Column mobile={16} tablet={10} computer={5}>
                     <Form  size='large' error = {this.state.errors.error}>
-        
                         <Message
                             floating
                             size='mini'

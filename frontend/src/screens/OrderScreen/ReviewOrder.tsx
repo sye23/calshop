@@ -48,6 +48,7 @@ export default class ReviewOrder extends React.Component < any, any > {
         localStorage.removeItem('date');
         localStorage.removeItem('roll');
         localStorage.removeItem('customer');
+        localStorage.removeItem('company');
     }
 
     reorder = async() =>{
@@ -150,7 +151,7 @@ export default class ReviewOrder extends React.Component < any, any > {
                                             </Table.Row>
                                             </Table.Footer> */}
                                         </Table>
-                                    </Grid.Column>
+                                    </Grid.Column> 
                                 </Grid.Row>
                         )
                     })}

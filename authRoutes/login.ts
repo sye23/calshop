@@ -8,7 +8,7 @@ import { UserLogin } from '../types/login';
 router.post('/', async (req: Request, res: Response) => {
     let loginInfo: UserLogin = req.body.login;
     let login = await db.login_repo.userLogin(loginInfo);
-    if(login  === 'error'){
+    if(login  === 'error' || login === undefined){
         res.status(403).send('Invalid Login Credentials');
     } else {
         let tokenObj = {
@@ -23,6 +23,7 @@ router.post('/', async (req: Request, res: Response) => {
             roll: 'user',
             firstName: login.firstName,
             lastName: login.lastName,
+            company: login.company,
             phone: login.phone,
             email: login.email
         });
@@ -31,4 +32,4 @@ router.post('/', async (req: Request, res: Response) => {
         
 });
 
-export default router;
+export default router; 
