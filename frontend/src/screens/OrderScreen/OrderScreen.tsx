@@ -55,7 +55,8 @@ class OrderScreen extends React.Component < any, any > {
       },
       finalOrder:[],
       isReviewable: false,
-      render: ''
+      render: '',
+      modalOpen: false
     }
   }
 
@@ -117,6 +118,7 @@ class OrderScreen extends React.Component < any, any > {
 
   backClickHandler = () =>{
     localStorage.removeItem('date');
+    localStorage.removeItem('customer')
   }
 
   async componentWillMount(){
@@ -174,6 +176,10 @@ class OrderScreen extends React.Component < any, any > {
     }
     return false;
   }
+
+  handleOpen = () => this.setState({ modalOpen: true });
+  
+  handleClose = () => this.setState({ modalOpen: false })
 
 
 

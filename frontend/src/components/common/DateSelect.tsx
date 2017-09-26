@@ -2,7 +2,7 @@ import * as React from 'react';
 import DatePicker from 'react-datepicker';
 import * as moment from 'moment';
 import { connect } from 'react-redux';
-import * as reducerActions from '../actions/actions';
+import * as reducerActions from '../../actions/actions';
 
 
 
@@ -27,7 +27,6 @@ class DateSelect extends React.Component < any, any > {
   }
 
   render() {
-    console.log('date state ******',this.state.startDate);
     return (
       <DatePicker
         selected={this.state.startDate}
