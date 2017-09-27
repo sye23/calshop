@@ -5,6 +5,7 @@ import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import * as reducerActions from '../../actions/actions';
+import {StartFormState} from '../../types/SartFormState';
 import * as moment from 'moment';
 import InfoForm from './InfoForm';
 import 'react-datepicker/dist/react-datepicker.css';
