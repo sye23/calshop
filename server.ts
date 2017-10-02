@@ -10,7 +10,7 @@ import { checkToken } from './tokenCheck';
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(sslRedirect());
+app.use(sslRedirect(['production'], 301));
 
 app.use('/auth', authRouter);
 app.use('/api', checkToken, router);
