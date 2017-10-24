@@ -6,6 +6,7 @@ import StartForm from './screens/StartForm/StartForm';
 import OrderScreen from './screens/OrderScreen/OrderScreen';
 import PrivateRoute from './PrivateRoute';
 import ReviewOrder from './screens/OrderScreen/ReviewOrder';
+import FileUploader from './components/FileUploader';
 
 
 
@@ -46,6 +47,7 @@ export default class App extends React.Component<any, any> {
           <div>
 
             <Route exact path="/" component={UserLogin} />
+            <Route path="/upload" component={FileUploader}/>
             <Route path="/chooseDate" component={PrivateRoute(StartForm, ['user'])} />
             <Route path="/orderForm" component={PrivateRoute(OrderScreen, ['user'])} />
           
