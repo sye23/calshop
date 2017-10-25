@@ -6,7 +6,7 @@ import { router } from './routes';
 import * as path from 'path';
 import { authRouter } from './authRoutes';
 import { checkToken } from './tokenCheck';
-import cacheControl from 'express-cache-controller';
+
 
 app.use((req, res, next) =>{
   let sslUrl;
@@ -22,10 +22,6 @@ app.use((req, res, next) =>{
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.use(cacheControl({
-  noStore: true
-}));
 
 app.use('/auth', authRouter);
 app.use('/api', checkToken, router);
