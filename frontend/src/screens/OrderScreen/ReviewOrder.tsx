@@ -150,7 +150,7 @@ export default class ReviewOrder extends React.Component < any, any > {
                                                 </Table.Row>
                                             
                                             </Table.Body>
-                                            <Table.Footer fullWidth>
+                                            {/* <Table.Footer fullWidth>
                                             <Table.Row>
                                                 <Table.HeaderCell />
                                                 <Table.HeaderCell textAlign= 'right'>
@@ -158,7 +158,7 @@ export default class ReviewOrder extends React.Component < any, any > {
                                                     <Button color='red' size='small'>Remove Order</Button>
                                                 </Table.HeaderCell>
                                             </Table.Row>
-                                            </Table.Footer>
+                                            </Table.Footer> */}
                                         </Table>
                                     </Grid.Column> 
                                 </Grid.Row>
