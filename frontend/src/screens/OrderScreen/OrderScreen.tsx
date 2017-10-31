@@ -200,6 +200,7 @@ class OrderScreen extends React.Component < any, any > {
       render = <ReviewOrder 
                   order = {this.state.finalOrder} 
                   user = {this.state.user}
+                  isReviewable ={this.state.isReviewable}
                />
     }else{
       render = <OrderForm

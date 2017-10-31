@@ -133,6 +133,31 @@ body {
     background-color: #d42427;
 }
 
+.uploadLabel {
+    float: left;
+    font-family: 'Belleza', sans-serif;
+}
+
+.dropzone {
+    color: black !important;
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 2%;
+}
+
+.dropzone>div {
+    width: 100% !important;
+    height: 100px !important;
+    border-width: 2px;
+    border-color: lightgray !important;
+    border-style: dashed;
+    border-radius: 5px;
+}
+
+.uploadModal {
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .ui.form {
         padding-left: 3%;

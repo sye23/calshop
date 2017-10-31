@@ -2,7 +2,8 @@ import * as nodemailer from 'nodemailer';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
 import * as del from 'del';
-import * as Loki from 'lokijs';
+import * as fs from 'fs'; 
+import * as path from 'path';
 
 function verifyEmail(emailAddress : string, htmlMessage : string) : string {
     let error = 'hello';
@@ -34,6 +35,9 @@ function verifyEmail(emailAddress : string, htmlMessage : string) : string {
 }
 
 function sendEmail(htmlMessage : any, from: any) {
+
+    const directory = path.join(__dirname, '../uploads');
+
     
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -42,11 +46,12 @@ function sendEmail(htmlMessage : any, from: any) {
             pass: process.env.EMAIL_PASSWORD
         }
     });
-    let mailOptions = {
+    let mailOptions: any = {
         from: process.env.EMAIL_USERNAME,
         to: 'shalomeisenbach@gmail.com',
         subject: `New Order From: ${from}`,
-        html: htmlMessage
+        html: htmlMessage,
+        attachments: setAttachments()
     };
 
     transporter.sendMail(mailOptions, (err : any, info : any) => {
@@ -55,8 +60,37 @@ function sendEmail(htmlMessage : any, from: any) {
         }
         
     });
+    setTimeout(function() {
+        clearDir(directory);
+    }, 5000);
     return 'sent';
 }
+
+let clearDir = (directory: any)=>{
+    fs.readdir(directory, (err, files) => {
+       if (err) throw err;
+       for (const file of files) {
+           fs.unlink(path.join(directory, file), err => {
+           if (err) throw err;
+           });
+       }
+   })
+   
+}
+
+let setAttachments = ()=>{
+    const directory = path.join(__dirname, '../uploads');
+    let fileList = fs.readdirSync(directory);
+    let attachment: any = [];
+
+    fileList.map((f:any, index: any)=>{
+        attachment.push({   filename: f,
+            path: path.join(directory , f)
+        })
+    })
+      return attachment;  
+}
+
 
 function createRandomToken(amountOfBytes : number) {
     return crypto

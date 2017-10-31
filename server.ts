@@ -4,11 +4,15 @@ import * as bodyParser from 'body-parser';
 const app = express();
 import { router } from './routes';
 import * as path from 'path';
+import * as fs from 'fs';
+
 import { authRouter } from './authRoutes';
 import { checkToken } from './tokenCheck';
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 app.use('/auth', authRouter);
 app.use('/api', checkToken, router);

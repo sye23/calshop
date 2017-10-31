@@ -1,32 +1,32 @@
 import * as utils from '../utils/utilFunctions';
 import * as express from 'express-promise-router';
 const router = express();
-import { Request, Response } from 'express';
-import * as multer from 'multer'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as Loki from 'lokijs'
+import { Request, Response } from 'express'; 
+import * as multer from 'multer';
+import * as fs from 'fs';
+import * as path from 'path';
 
 
-const DB_NAME = 'db.json';
-const COLLECTION_NAME = 'list';
-const UPLOAD_PATH = 'uploads';
-const upload = multer({ dest: `${UPLOAD_PATH}/`, fileFilter: utils.fileFilter });
-const db = new Loki(`${UPLOAD_PATH}/${DB_NAME}`, { persistenceMethod: 'fs' });
+const routeToPublic = path.join(__dirname, '../uploads');
+const maxSize = 5242880;
 
-
-router.post('/', upload.single('file'), async (req: Request, res: Response) => {
-    console.log(req.body)
-    try {
-        utils.cleanFolder(UPLOAD_PATH);
-        const col = await utils.loadCollection(COLLECTION_NAME, db);
-        const data = col.insert(req.file);
-
-        db.saveDatabase();
-        res.send({ id: data.$loki, fileName: data.filename, originalName: data.originalname });
-    } catch (err) {
-        res.sendStatus(400);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, routeToPublic)
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
     }
+  })
+
+const upload = multer({ storage: storage ,
+                        limits: { fileSize: maxSize }
+                        });
+
+
+router.post('/', upload.array('files', 5), (req: Request, res: Response) => {
+
+    res.json(req.files);
 })
 
 export default router; 
