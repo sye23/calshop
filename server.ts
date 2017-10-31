@@ -21,6 +21,18 @@ app.use((req, res, next) =>{
   return next();
 });
 
+app.use((req, res, next) =>{
+  let sslUrl;
+
+  if (process.env.PROD && req.headers['x-forwarded-proto'] !== 'https') {
+
+    sslUrl = ['https://www.thecalligraphyshop.com', req.url].join('');
+    return res.redirect(sslUrl);
+  }
+
+  return next();
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

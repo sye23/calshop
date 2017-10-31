@@ -30,12 +30,17 @@ export default class FileUploader extends React.Component<any, any> {
   uploadClick = ()=>{
     const fd = new FormData();
 
+    const token: any = localStorage.getItem('token');
+    const config = {
+      headers: { 'x-access-token': token }
+    };
+
     for(let i = 0; i < this.state.files.length; i++){
       console.log('here')
       fd.append('files', this.state.files[i]);
     }
     
-    let response = axios.post('/auth/fileUpload', fd);
+    let response = axios.post('/api/fileUpload', fd, config);
     this.handleClose();
   }
 
