@@ -8,6 +8,8 @@ import * as reducerActions from '../../actions/actions';
 import * as moment from 'moment';
 import axios from 'axios';
 import 'react-datepicker/dist/react-datepicker.css';
+import FileUploader from '../../components/FileUploader';
+
 
  
 
@@ -68,6 +70,10 @@ export default class ReviewOrder extends React.Component < any, any > {
         localStorage.removeItem('customer');
     }
 
+    removeOrder = (index:any)=>{
+        this.props.order.splice(index,1);
+    }
+
     render(){
         let render;
         let redirect;
@@ -89,6 +95,8 @@ export default class ReviewOrder extends React.Component < any, any > {
                     <Grid stackable>
                     <Grid.Row centered id='reviewHeader'>
                         <Grid.Column textAlign='center' mobile={16} tablet={16} computer={8}>
+                        <FileUploader/>
+
                             <h2 className='formTitle'>Review Order</h2>
                             <h3 className='forTitle'> For: {this.props.order[0].customer}</h3>
                             <h3 className='dateTitle'> Date of Event: {this.props.order[0].date}</h3>
@@ -142,21 +150,21 @@ export default class ReviewOrder extends React.Component < any, any > {
                                                 </Table.Row>
                                             
                                             </Table.Body>
-                                            {/* <Table.Footer fullWidth>
+                                            <Table.Footer fullWidth>
                                             <Table.Row>
                                                 <Table.HeaderCell />
                                                 <Table.HeaderCell textAlign= 'right'>
+                                                    <Button color='green' size='small'>Edit Order</Button>
                                                     <Button color='red' size='small'>Remove Order</Button>
                                                 </Table.HeaderCell>
                                             </Table.Row>
-                                            </Table.Footer> */}
+                                            </Table.Footer>
                                         </Table>
                                     </Grid.Column> 
                                 </Grid.Row>
                         )
                     })}
                         
-                    
                     
                     <Grid.Row centered>
                     <Grid.Column textAlign='center'>

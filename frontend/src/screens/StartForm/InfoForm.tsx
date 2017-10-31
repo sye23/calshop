@@ -17,14 +17,14 @@ const InfoForm = (props: any) =>{
                     <Form>
                         <Form.Group widths='equal'>
                             <Form.Input 
-                                label=' Customer First Name' 
+                                label=" Your Customer's First Name" 
                                 placeholder='First Name' 
                                 name='firstName' 
                                 value={props.firstName} 
                                 onChange={props.inputChangeHandler}
                             />
                             <Form.Input 
-                                label='Customer Last Name' 
+                                label=" Your Customer's Last Name" 
                                 placeholder='Last Name' 
                                 name='lastName' 
                                 value={props.lastName}

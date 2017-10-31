@@ -1,6 +1,9 @@
 import * as nodemailer from 'nodemailer';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
+import * as del from 'del';
+import * as fs from 'fs'; 
+import * as path from 'path';
 
 function verifyEmail(emailAddress : string, htmlMessage : string) : string {
     let error = 'hello';
@@ -32,6 +35,9 @@ function verifyEmail(emailAddress : string, htmlMessage : string) : string {
 }
 
 function sendEmail(htmlMessage : any, from: any) {
+
+    const directory = path.join(__dirname, '../uploads');
+
     
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -40,11 +46,12 @@ function sendEmail(htmlMessage : any, from: any) {
             pass: process.env.EMAIL_PASSWORD
         }
     });
-    let mailOptions = {
+    let mailOptions: any = {
         from: process.env.EMAIL_USERNAME,
         to: 'thecalshop@gmail.com',
         subject: `New Order From: ${from}`,
-        html: htmlMessage
+        html: htmlMessage,
+        attachments: setAttachments()
     };
 
     transporter.sendMail(mailOptions, (err : any, info : any) => {
@@ -53,8 +60,37 @@ function sendEmail(htmlMessage : any, from: any) {
         }
         
     });
+    setTimeout(function() {
+        clearDir(directory);
+    }, 5000);
     return 'sent';
 }
+
+let clearDir = (directory: any)=>{
+    fs.readdir(directory, (err, files) => {
+       if (err) throw err;
+       for (const file of files) {
+           fs.unlink(path.join(directory, file), err => {
+           if (err) throw err;
+           });
+       }
+   })
+   
+}
+
+let setAttachments = ()=>{
+    const directory = path.join(__dirname, '../uploads');
+    let fileList = fs.readdirSync(directory);
+    let attachment: any = [];
+
+    fileList.map((f:any, index: any)=>{
+        attachment.push({   filename: f,
+            path: path.join(directory , f)
+        })
+    })
+      return attachment;  
+}
+
 
 function createRandomToken(amountOfBytes : number) {
     return crypto
@@ -66,4 +102,34 @@ function comparePassword(password: string, enteredPassword: string) {
     return bcrypt.compare(enteredPassword, password);
 }
 
-export {sendEmail, createRandomToken, comparePassword}
+
+const loadCollection = function (colName: any, db: Loki): Promise<LokiCollection<any>> {
+    return new Promise(resolve => {
+        db.loadDatabase({}, () => {
+            const _collection = db.getCollection(colName) || db.addCollection(colName);
+            resolve(_collection);
+        })
+    });
+}
+const fileFilter = function (req: any, file: any, cb: any) {
+
+    if (!file.originalname.match(/\.(pdf|xml|xlsx|xlsm|xltx|xltm|csv|txt|doc|docx)$/)) {
+        return cb(new Error('Try a different file type'), false);
+    }
+    cb(null, true);
+};
+
+
+const cleanFolder = function (folderPath: any) {
+    // delete files inside folder but not the folder itself
+    del.sync([`${folderPath}/**`, `!${folderPath}`]);
+};
+
+export {
+    sendEmail, 
+    createRandomToken, 
+    comparePassword, 
+    loadCollection, 
+    fileFilter, 
+    cleanFolder
+}
