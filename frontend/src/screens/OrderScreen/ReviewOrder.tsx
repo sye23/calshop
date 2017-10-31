@@ -95,7 +95,7 @@ export default class ReviewOrder extends React.Component < any, any > {
                     <Grid stackable>
                     <Grid.Row centered id='reviewHeader'>
                         <Grid.Column textAlign='center' mobile={16} tablet={16} computer={8}>
-                        {/* s<FileUploader/> */}
+                        <FileUploader/>
 
                             <h2 className='formTitle'>Review Order</h2>
                             <h3 className='forTitle'> For: {this.props.order[0].customer}</h3>

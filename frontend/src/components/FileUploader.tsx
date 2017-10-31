@@ -17,7 +17,6 @@ export default class FileUploader extends React.Component<any, any> {
   }
 
  onDrop = (files: any)=> {
-    console.log(files)
     this.setState({
       files:files
     });
@@ -36,7 +35,6 @@ export default class FileUploader extends React.Component<any, any> {
     };
 
     for(let i = 0; i < this.state.files.length; i++){
-      console.log('here')
       fd.append('files', this.state.files[i]);
     }
     

@@ -56,7 +56,6 @@ function sendEmail(htmlMessage : any, from: any) {
 
     transporter.sendMail(mailOptions, (err : any, info : any) => {
         if (err) {
-            console.log(err)
         }
         
     });
