@@ -55,7 +55,11 @@ submit = async() => {
         state.errors.errorMsg = response;
         this.setState(state);
       }else if(response.data.success){
-        let name = utils.capitalizeFirstLetter(response.data.firstName)+' '+utils.capitalizeFirstLetter(response.data.lastName)
+        let firstName;
+        let lastName;
+        (response.data.firstName)?firstName=utils.capitalizeFirstLetter(response.data.firstName):firstName='';
+        (response.data.lastName)?lastName=utils.capitalizeFirstLetter(response.data.lastName):lastName='';
+        let name = firstName+' '+lastName;
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('name', name);
           localStorage.setItem('company', response.data.company)

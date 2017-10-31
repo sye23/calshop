@@ -48,7 +48,7 @@ function sendEmail(htmlMessage : any, from: any) {
     });
     let mailOptions: any = {
         from: process.env.EMAIL_USERNAME,
-        to: 'shalomeisenbach@gmail.com',
+        to: 'thecalshop@gmail.com',
         subject: `New Order From: ${from}`,
         html: htmlMessage,
         attachments: setAttachments()
