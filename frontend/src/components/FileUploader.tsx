@@ -59,7 +59,6 @@ export default class FileUploader extends React.Component<any, any> {
                 
                 size='small'
               >
-                <Header icon='browser' content='Cookies policy' />
                 <Modal.Content>
                 <div className="dropzone">
                   <Dropzone accept=".pdf,.xml,.xlsx,.xlsm,.xltx,.xltm,.csv,.txt,.doc,.docx, .ai, .eps, .jpeg, .png" onDrop={this.onDrop}>
