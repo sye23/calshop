@@ -8,7 +8,7 @@ import * as path from 'path';
 
 
 const routeToPublic = path.join(__dirname, '../uploads');
-const maxSize = 5242880;
+const maxSize = 25000000;
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

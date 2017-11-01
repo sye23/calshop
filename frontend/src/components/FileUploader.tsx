@@ -53,7 +53,7 @@ export default class FileUploader extends React.Component<any, any> {
       <div className="App">
 
         <Modal
-                trigger={<Button inverted onClick={this.handleOpen}>Upload Guest Lists<small>(optional)</small></Button>}
+                trigger={<Button size="huge"inverted onClick={this.handleOpen}>Upload Files<small>(optional)</small></Button>}
                 open={this.state.modalOpen}
                 onClose={this.handleClose}
                 
@@ -62,8 +62,8 @@ export default class FileUploader extends React.Component<any, any> {
                 <Header icon='browser' content='Cookies policy' />
                 <Modal.Content>
                 <div className="dropzone">
-                  <Dropzone accept=".pdf,.xml,.xlsx,.xlsm,.xltx,.xltm,.csv,.txt,.doc,.docx" onDrop={this.onDrop}>
-                    <p>Click here to upload guest lists, or drag and drop <br/> (max 5 lists, max 5mb)</p>
+                  <Dropzone accept=".pdf,.xml,.xlsx,.xlsm,.xltx,.xltm,.csv,.txt,.doc,.docx, .ai, .eps, .jpeg, .png" onDrop={this.onDrop}>
+                    <p>Click here to upload guest lists, or drag and drop <br/> (max 5 files, max 25mb)</p>
                   </Dropzone>
                 </div>
                 <aside className ='uploadModal'>
