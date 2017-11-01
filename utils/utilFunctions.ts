@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import * as del from 'del';
 import * as fs from 'fs'; 
 import * as path from 'path';
+import * as findRemoveSync from 'find-remove';
 
 function verifyEmail(emailAddress : string, htmlMessage : string) : string {
     let error = 'hello';
@@ -65,16 +66,34 @@ function sendEmail(htmlMessage : any, from: any) {
     return 'sent';
 }
 
+function sendEmailReceipt(htmlMessage : any, to: any) {
+        
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USERNAME,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        });
+        let mailOptions: any = {
+            from: process.env.EMAIL_USERNAME,
+            to: to,
+            subject: `Order Confirmation From The Calligraphy Shop`,
+            html: htmlMessage,
+        };
+    
+        transporter.sendMail(mailOptions, (err : any, info : any) => {
+            if (err) {
+            }
+            
+        });
+       
+        return 'sent';
+    }
+
 let clearDir = (directory: any)=>{
-    fs.readdir(directory, (err, files) => {
-       if (err) throw err;
-       for (const file of files) {
-           fs.unlink(path.join(directory, file), err => {
-           if (err) throw err;
-           });
-       }
-   })
-   
+    var result = findRemoveSync(directory, {files: ['*.*'], ignore: '.gitkeep'});
+    
 }
 
 let setAttachments = ()=>{
@@ -126,6 +145,7 @@ const cleanFolder = function (folderPath: any) {
 
 export {
     sendEmail, 
+    sendEmailReceipt,
     createRandomToken, 
     comparePassword, 
     loadCollection, 

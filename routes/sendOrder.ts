@@ -13,7 +13,10 @@ router.post('/', async(req : Request, res : Response) => {
                                                     Phone:${user.phone}<br/> 
                                                     Email:${user.email}</h3>
                         <h3>For:${orders[0].customer}</h3>
-                        <h3>Date Of Event:${orders[0].date}</h3><hr/>`
+                        <h3>Date Of Event:${orders[0].date}</h3><hr/>`;
+    let receiptTitle  = `<h3 style="text-align:center">Thank You For Your Order</h3>
+                        <h3>For:${orders[0].customer}</h3>
+                        <h3>Date Of Event:${orders[0].date}</h3><hr/>`;                    
     let orderEmail = orders.map((order: any, index: any)=>{
         return (`<table style="text-align:left"> 
                     <tr> 
@@ -55,8 +58,8 @@ router.post('/', async(req : Request, res : Response) => {
                 </table><br/>`
             )
     });
-
-   let response =  utils.sendEmail(emailTitle+orderEmail.join(), user.name);
+    let receipt = utils.sendEmailReceipt(receiptTitle+orderEmail.join(), user.email);
+   let response =  utils.sendEmail(emailTitle+orderEmail.join(), orders[0].customer +" - "+ user.name);
    res.json(response);
 })
 
