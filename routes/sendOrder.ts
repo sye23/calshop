@@ -6,6 +6,7 @@ import * as utils from '../utils/utilFunctions';
 router.post('/', async(req : Request, res : Response) => {
     let orders = req.body.order;
     let user = req.body.user;
+    let path = req.body.path;
     let name;
     (user.name.length > 1)?name=`${user.name} / `:name='';
 
@@ -58,8 +59,13 @@ router.post('/', async(req : Request, res : Response) => {
                 </table><br/>`
             )
     });
+   let response =  utils.sendEmail(emailTitle+orderEmail.join(), orders[0].customer +" - "+ user.name, path);
+
+   console.log('response from email', response);
+   if(response === 'sent'){
     let receipt = utils.sendEmailReceipt(receiptTitle+orderEmail.join(), user.email);
-   let response =  utils.sendEmail(emailTitle+orderEmail.join(), orders[0].customer +" - "+ user.name);
+    
+   }
    res.json(response);
 })
 

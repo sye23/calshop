@@ -8,6 +8,7 @@ import paper from './paper';
 import size from './size';
 import sendOrder from './sendOrder';
 import fileUpload from './fileUpload';
+import logout from './logout';
 
 
 router.use('/items', items);
@@ -18,6 +19,7 @@ router.use('/paper', paper);
 router.use('/size', size);
 router.use('/sendOrder', sendOrder);
 router.use('/fileUpload', fileUpload);
+router.use('/logout', logout);
 
 
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button,Grid,Table} from 'semantic-ui-react';
+import {Button,Grid,Table, Divider} from 'semantic-ui-react';
 import * as utils from '../../utils/utilFunctions';
 import { Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -21,7 +21,7 @@ export default class ReviewOrder extends React.Component < any, any > {
         this.state = {
             isSubmitted: false,
             isReordering: false,
-            isLoggingout: false,
+            isLoggingout: false, 
             isRedirecting: false
         }
     }
@@ -31,18 +31,22 @@ export default class ReviewOrder extends React.Component < any, any > {
 
     //console.log('2prop order******',this.props.order);
     submit= async() =>{
+        let path = localStorage.getItem('path');
         const token: any = localStorage.getItem('token');
         const config = {
           headers: { 'x-access-token': token }
         };
-        let response = await axios.post('api/sendOrder',{order:this.props.order, user: this.props.user},config)
+        let response = await axios.post('api/sendOrder',{order:this.props.order, user: this.props.user, path:localStorage.getItem('path')},config)
         .catch((e:any)=>{return e.response.data});
         if(response.data === 'sent'){
             this.setState({isSubmitted: true})
-            setTimeout(() => {
+             setTimeout (async() => {
+                let logout =await axios.post('api/logout', {path:path}, config);
                 this.setState({isLoggingout: true})
             }, 4000); 
         }
+        
+        
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('phone');
@@ -51,6 +55,7 @@ export default class ReviewOrder extends React.Component < any, any > {
         localStorage.removeItem('roll');
         localStorage.removeItem('customer');
         localStorage.removeItem('company');
+        localStorage.removeItem('path');
     }
 
     reorder = async() =>{
@@ -58,7 +63,7 @@ export default class ReviewOrder extends React.Component < any, any > {
         const config = {
           headers: { 'x-access-token': token }
         };
-        let response = await axios.post('api/sendOrder',{order:this.props.order, user: this.props.user},config)
+        let response = await axios.post('api/sendOrder',{order:this.props.order, user: this.props.user, path:localStorage.getItem('path')},config)
         .catch((e:any)=>{return e.response.data});
         if(response.data === 'sent'){
             this.setState({isReordering: true})
@@ -95,7 +100,7 @@ export default class ReviewOrder extends React.Component < any, any > {
                     <Grid stackable>
                     <Grid.Row centered id='reviewHeader'>
                         <Grid.Column textAlign='center' mobile={16} tablet={16} computer={8}>
-                        <FileUploader/>
+                        
 
                             <h2 className='formTitle'>Review Order</h2>
                             <h3 className='forTitle'> For: {this.props.order[0].customer}</h3>
@@ -168,6 +173,8 @@ export default class ReviewOrder extends React.Component < any, any > {
                     
                     <Grid.Row centered>
                     <Grid.Column textAlign='center'>
+                        <FileUploader/>
+                        <Divider />
                         <Button size='huge' inverted onClick={this.reorder}>Finish And <br/> Start New Order</Button>
                         <Button size='huge' inverted onClick={this.submit}>Place Order <br/> And Finish</Button>
                     </Grid.Column>

@@ -5,14 +5,16 @@ import { Request, Response } from 'express';
 import * as multer from 'multer';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as tmp from 'tmp';
 
 
 const routeToPublic = path.join(__dirname, '../uploads');
 const maxSize = 25000000;
 
+
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, routeToPublic)
+    destination: function (req: any, file, cb:any) {
+      cb(null, req.body.path)
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)
