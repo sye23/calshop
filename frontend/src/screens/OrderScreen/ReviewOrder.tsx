@@ -29,7 +29,6 @@ export default class ReviewOrder extends React.Component < any, any > {
     //console.log('1prop order******',this.props.order);
     //this.props.order.splice(0,1);
 
-    //console.log('2prop order******',this.props.order);
     submit= async() =>{
         let path = localStorage.getItem('path');
         const token: any = localStorage.getItem('token');
