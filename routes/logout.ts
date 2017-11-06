@@ -12,10 +12,7 @@ router.post('/', async(req : Request, res : Response) => {
     console.log('directory:  ', dir)
 
     rimraf(dir,()=>console.log('deleted'))
-    // const directory = path.join(__dirname, '../uploads');
-
-    // let  result = findRemoveSync(directory, {dir: dir});
-    // console.log('results:  ',result)
+   
     res.json('file deleted')
 })
 
