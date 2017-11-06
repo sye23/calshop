@@ -66,6 +66,7 @@ submit = async() => {
           localStorage.setItem('phone', response.data.phone);
           localStorage.setItem('email', response.data.email);
           localStorage.setItem('roll', response.data.roll);
+          localStorage.setItem('path', response.data.userDir)
           this.setState({isSubmittable: true});
       }
  }

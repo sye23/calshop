@@ -1,8 +1,8 @@
-import * as lokiIndexedAdapter from 'loki-indexed-adapter';
 import * as React from 'react';
 import axios from 'axios';
 import {Input, Table, Button, Message, Modal,Icon, Header} from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
+import * as querystring from 'querystring';
 
 
 
@@ -27,18 +27,20 @@ export default class FileUploader extends React.Component<any, any> {
   handleClose = () => this.setState({ modalOpen: false })
 
   uploadClick = ()=>{
-    const fd = new FormData();
+    const fd: any = new FormData();
 
     const token: any = localStorage.getItem('token');
     const config = {
       headers: { 'x-access-token': token }
     };
 
+    const path = localStorage.getItem('path');
+    fd.append('path', path);
     for(let i = 0; i < this.state.files.length; i++){
       fd.append('files', this.state.files[i]);
     }
     
-    let response = axios.post('/api/fileUpload', fd, config);
+    let response = axios.post(`/api/fileUpload`,fd, config);
     this.handleClose();
   }
 

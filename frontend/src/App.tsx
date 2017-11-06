@@ -7,7 +7,7 @@ import OrderScreen from './screens/OrderScreen/OrderScreen';
 import PrivateRoute from './PrivateRoute';
 import ReviewOrder from './screens/OrderScreen/ReviewOrder';
 import FileUploader from './components/FileUploader';
-
+import axios from 'axios';
 
 
 
@@ -22,10 +22,11 @@ export default class App extends React.Component<any, any> {
     return false;
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     if (localStorage.getItem('token') !== null) {
       const token: any = localStorage.getItem('token');
       if (this.checkWebToken(token)) {
+        let logout = await axios.post('api/logout', {path:localStorage.getItem('path')},{headers: { 'x-access-token': token }});
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('phone');
@@ -34,6 +35,7 @@ export default class App extends React.Component<any, any> {
         localStorage.removeItem('roll');
         localStorage.removeItem('customer');
         localStorage.removeItem('company');
+        localStorage.removeItem('path');
       }
     }
 

@@ -1,7 +1,6 @@
 import * as nodemailer from 'nodemailer';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
-import * as del from 'del';
 import * as fs from 'fs'; 
 import * as path from 'path';
 import * as findRemoveSync from 'find-remove';
@@ -35,9 +34,9 @@ function verifyEmail(emailAddress : string, htmlMessage : string) : string {
 
 }
 
-function sendEmail(htmlMessage : any, from: any) {
+function sendEmail(htmlMessage : any, from: any, path:any) {
 
-    const directory = path.join(__dirname, '../uploads');
+    const directory = path;
 
     
     let transporter = nodemailer.createTransport({
@@ -52,7 +51,7 @@ function sendEmail(htmlMessage : any, from: any) {
         to: 'thecalshop@gmail.com',
         subject: `New Order From: ${from}`,
         html: htmlMessage,
-        attachments: setAttachments()
+        attachments: setAttachments(directory)
     };
 
     transporter.sendMail(mailOptions, (err : any, info : any) => {
@@ -62,7 +61,7 @@ function sendEmail(htmlMessage : any, from: any) {
     });
     setTimeout(function() {
         clearDir(directory);
-    }, 5000);
+    }, 3000);
     return 'sent';
 }
 
@@ -88,22 +87,22 @@ function sendEmailReceipt(htmlMessage : any, to: any) {
             
         });
        
-        return 'sent';
+        return 'sent'; 
     }
 
 let clearDir = (directory: any)=>{
-    var result = findRemoveSync(directory, {files: ['*.*'], ignore: '.gitkeep'});
+    var result = findRemoveSync(directory, {files: ['*.*']});
     
 }
 
-let setAttachments = ()=>{
-    const directory = path.join(__dirname, '../uploads');
+let setAttachments = (path:any)=>{
+    const directory = path;
     let fileList = fs.readdirSync(directory);
     let attachment: any = [];
 
     fileList.map((f:any, index: any)=>{
         attachment.push({   filename: f,
-            path: path.join(directory , f)
+            path: directory +'/'+f
         })
     })
       return attachment;  
@@ -121,14 +120,6 @@ function comparePassword(password: string, enteredPassword: string) {
 }
 
 
-const loadCollection = function (colName: any, db: Loki): Promise<LokiCollection<any>> {
-    return new Promise(resolve => {
-        db.loadDatabase({}, () => {
-            const _collection = db.getCollection(colName) || db.addCollection(colName);
-            resolve(_collection);
-        })
-    });
-}
 const fileFilter = function (req: any, file: any, cb: any) {
 
     if (!file.originalname.match(/\.(pdf|xml|xlsx|xlsm|xltx|xltm|csv|txt|doc|docx)$/)) {
@@ -138,17 +129,11 @@ const fileFilter = function (req: any, file: any, cb: any) {
 };
 
 
-const cleanFolder = function (folderPath: any) {
-    // delete files inside folder but not the folder itself
-    del.sync([`${folderPath}/**`, `!${folderPath}`]);
-};
 
 export {
     sendEmail, 
     sendEmailReceipt,
     createRandomToken, 
     comparePassword, 
-    loadCollection, 
-    fileFilter, 
-    cleanFolder
+    fileFilter
 }
